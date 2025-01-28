@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .back-btn {
+            text-align: center;
+            color: #333;
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <form class="edit-profile-form">
+        <h2>Edit Your Profile</h2>
+        
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name">
+        
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email">
+        
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+        
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="3" placeholder="Enter your address"></textarea>
+        
+        <button type="button" id="saveChanges">Save Changes</button>
+        <a href="profile.html" class="back-btn">Cancel</a>
+    </form>
+
+    <script>
+        // Load saved data into the form on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedData = JSON.parse(localStorage.getItem('profileData'));
+            if (savedData) {
+                document.getElementById('name').value = savedData.name || '';
+                document.getElementById('email').value = savedData.email || '';
+                document.getElementById('phone').value = savedData.phone || '';
+                document.getElementById('address').value = savedData.address || '';
+            }
+        });
+
+        // Save form data to localStorage on button click
+        document.getElementById('saveChanges').addEventListener('click', () => {
+            const profileData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+            };
+
+            localStorage.setItem('profileData', JSON.stringify(profileData));
+            alert('Changes saved successfully!');
+        });
+    </script>
+</body>
+</html>

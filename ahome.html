@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Rental System</title>
+    <style>
+        :root {
+            --primary-color: #2d2d2f;
+            --secondary-color: #f4f4f4;
+            --text-color: #333;
+            --highlight-color: #f38a3f;
+            --hover-effect-color: #e6b800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: var(--text-color);
+            background: var(--secondary-color);
+        }
+
+        header {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.0rem;
+            font-weight: bold;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight-color);
+            transition: width 0.3s;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .hero {
+            position: relative; /* Required for pseudo-element */
+            color: #545454;
+            padding: 4rem 2rem;
+            height: 80vh;
+            display: flex;
+            justify-content: space-between; /* Space between text and image */
+            align-items: center; /* Vertically align content */
+            gap: 2rem;
+            overflow: hidden; /* Prevent pseudo-element overflow */
+        }
+        
+        .hero::before {
+            content: "";
+            background: url('heroback.jpg') no-repeat center center / cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3; /* Adjust this value (0.1 to 1) for desired transparency */
+            z-index: -1; /* Place it behind the content */
+        }
+        
+        .hero-content {
+            flex: 1; /* Take up half the width */
+            max-width: 50%;
+            text-align: left; /* Align text to the left */
+            z-index: 1; /* Ensure content stays above the background */
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .hero-content .btn {
+            background: var(--highlight-color, #f38a3f);
+            color: #333;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+        
+        .hero-content .btn:hover {
+            background: #e6b800;
+            transform: scale(1.05);
+        }
+        
+        .hero-content h1 .highlight {
+            color: #f38a3f; /* Orange color */
+            font-weight: bold;
+        }
+        
+        .hero-image {
+            flex: 1; /* Take up the remaining half */
+            max-width: 50%;
+            display: flex; /* Center image */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+        
+        .hero-image img {
+            width: 120%;
+            max-width: 1200px;
+            height: auto;
+        }
+        
+        
+
+        .section {
+            padding: 2rem 2rem;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 300px;
+            position: relative;
+        }
+
+        .card .availability-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--highlight-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+
+        .card-body h3 {
+            margin-bottom: 0.5rem;
+            color: var(--highlight-color);
+        }
+
+        .card-body p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        .reviews-section {
+            padding: 2rem 2rem;
+            background: #fff;
+        }
+
+        .review-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-card h4 {
+            color: var(--highlight-color);
+        }
+
+        .review-card p {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .review-card .rating {
+            font-size: 1.2rem;
+            color: gold;
+        }
+        .navopt {
+            margin-top: 7px;
+        }
+        .login-btn {
+            background-color: #f38a3f;
+            color: #fff;
+            padding: 0.4rem 1.2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+            margin-left: auto; /* Add this line */
+        }
+
+        .login-btn:hover {
+            color: #fff; /* Ensure color stays the same */
+            text-decoration: none; /* No underline on hover */
+        }
+        
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--primary-color);
+                margin-top: 0.5rem;
+                padding: 0.5rem 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .navbar nav a {
+                margin: 0.5rem 1rem;
+            }
+
+            .navbar nav.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .flex {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        .navbar .logo img {
+            width: 150px;
+        }
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column; /* Stack the content vertically */
+                text-align: center; /* Center-align the text */
+            }
+        
+            .hero-content {
+                max-width: 100%; /* Allow full width for text */
+            }
+        
+            .hero-image {
+                max-width: 80%; /* Reduce image size on smaller screens */
+                margin-top: 1rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><img src="logo.png" alt="logo"></div>
+            <span class="navbar-toggle">&#9776;</span>
+            <nav>
+                <a href="ahome.html"  class="navopt">Home</a>
+                <a href="avehicles.html" class="navopt">Vehicles</a>
+                <a href="abooking.html" class="navopt">Book Now</a>
+                <a href="afteraboutus.html" class="navopt">About Us</a>
+                <a href="acontact.html" class="navopt">Contact</a>
+                <a href="profile.html" class="navopt">profile</a>
+                <a href="index.html" class="navopt">Logout</a>
+
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        
+        <div class="hero-content">
+            <h1>Book Self-Drive & With-Driver Car Rental in <span class="highlight">Indore</span></h1>
+            <p>Whether you're planning a road trip outside the city or looking for a convenient way to cruise around when you're out of town, DriveNGo is here to ease your travel.</p>
+            <a href="abooking.html" class="btn">Book Now</a>
+        </div>
+        <div class="hero-image">
+            <img src="carhero.png" alt="Car Image">
+        </div>
+    </div>
+    
+   
+    <section class="reviews-section">
+        <h2>Customer Reviews</h2>
+        <div class="review-card">
+            <h4>Hritik Jaiswal</h4>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p>Aap ne toh hamse bhi acha project banaya hai</p>
+        </div>
+        <div class="review-card">
+            <h4>Mansi Kumawat</h4>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p>Well done Ai avengers</p>
+        </div>
+        <div class="review-card">
+            <h4>Madhav Kumawat</h4>
+            <div class="rating">⭐⭐⭐⭐</div>
+            <p>Best Car rental website ever.</p>
+        </div>
+        <div class="review-card">
+            <h4>Manthan Sachdev</h4>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p>I had rented the car and it provided me great service.</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Vehicle Rental System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelector('.navbar-toggle').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

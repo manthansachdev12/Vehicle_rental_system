@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map with OpenStreetMap</title>
+    <style>
+        :root {
+            --primary-color: #2d2d2f;
+            --secondary-color: #f4f4f4;
+            --text-color: #333;
+            --highlight-color: #f38a3f;
+            --hover-effect-color: #e6b800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: var(--text-color);
+            background: var(--secondary-color);
+        }
+
+        header {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            width: 150px;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight-color);
+            transition: width 0.3s;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 180px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1001; /* Ensure it is above the map */
+            width: 500px;
+        }
+
+        .form-container h2 {
+            color: var(--highlight-color);
+            margin-bottom: 1rem;
+        }
+
+        .form-container label {
+            font-weight: bold;
+            display: block;
+            margin: 0.5rem 0 0.2rem;
+        }
+
+        .form-container input,
+        .form-container button {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            background: var(--highlight-color);
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .form-container button:hover {
+            background: var(--hover-effect-color);
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="navbar">
+            <div class="logo"><img src="logo.png" alt="logo"></div>
+            <nav>
+                <a href="ahome.html">Home</a>
+                <a href="abooking.html">Book now</a>
+                <a href="ahelp.html">Help</a>
+                <a href="index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Map Section -->
+    <div id="map"></div>
+
+    <!-- Form Section (Overlay) -->
+    <div class="form-container">
+        <h2>Book your Vehicle</h2>
+        <form>
+            <label for="pickup">Pickup Location:</label>
+            <input type="text" id="pickup" placeholder="Enter pickup location">
+
+            <label for="dropoff">Drop-off Location:</label>
+            <input type="text" id="dropoff" placeholder="Enter drop-off location">
+
+            <label for="pickup-time">Pickup Time:</label>
+            <input type="datetime-local" id="pickup-time">
+
+            <label for="drop-time">Drop-off Time:</label>
+            <input type="datetime-local" id="drop-time">
+
+            <button type="submit">Proceed</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Vehicle Rental System. All rights reserved.</p>
+    </footer>
+
+    <!-- Map Script -->
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([22.7196, 75.8577], 13); // Coordinates for Indore, MP
+
+        // Load and display the map tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add a marker
+        L.marker([22.7196, 75.8577]).addTo(map)
+            .bindPopup('Indore - Vehicle Rental System Location')
+            .openPopup();
+    </script>
+</body>
+</html>

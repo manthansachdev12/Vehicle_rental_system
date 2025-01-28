@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        :root {
+            --primary-color: #2d2d2f;
+            --secondary-color: #f4f4f4;
+            --text-color: #333;
+            --highlight-color: #f38a3f;
+            --hover-effect-color: #e6b800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: var(--text-color);
+            background: var(--secondary-color);
+        }
+
+        
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+
+        .navbar .logo img {
+            width: 150px;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #f39c12;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f39c12;
+            transition: width 0.3s;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .navbar nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar.open nav {
+                display: flex;
+            }
+
+            
+        }
+
+        .profile-section {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .profile-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin: 1rem;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .profile-card h3 {
+            margin-bottom: 1rem;
+            color: var(--highlight-color);
+        }
+
+        .profile-card p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card .edit-btn {
+            background: var(--highlight-color);
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .profile-card .edit-btn:hover {
+            background: #e6b800;
+            transform: scale(1.05);
+        }
+
+        .booking-table {
+            width: 100%;
+            margin-top: 2rem;
+            border-collapse: collapse;
+        }
+
+        .booking-table th,
+        .booking-table td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .booking-table th {
+            background-color: #f38a3f;
+            color: white;
+        }
+
+        .booking-table td {
+            background-color: #fff;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><img src="logo.png" alt="logo"></div>
+            <span class="navbar-toggle">&#9776;</span>
+            <nav>
+                <a href="ahome.html">Home</a>
+                <a href="avehicles.html">Vehicles</a>
+                <a href="abooking.html">Book Now</a>
+                <a href="afteraboutus.html">About Us</a>
+                <a href="acontact.html">Contact</a>
+                <a href="profile.html">Profile</a>
+                <a href="index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="profile-section">
+        <h2>Your Profile</h2>
+        <div class="profile-card">
+            <h3>Personal Information</h3>
+            <p>Name: Swastik Mishra</p>
+            <p>Email: swastikm206@gmail.com</p>
+            <p>Phone: 9302945443</p>
+            <a href="edit-profile.html" class="edit-btn">Edit Profile</a>
+        </div>
+
+        <div class="profile-card">
+            <h3>Your Bookings</h3>
+            <table class="booking-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Car Model</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12345</td>
+                        <td>Toyota Corolla</td>
+                        <td>Confirmed</td>
+                        <td>12/12/2024</td>
+                    </tr>
+                    <tr>
+                        <td>12346</td>
+                        <td>Honda Civic</td>
+                        <td>Cancelled</td>
+                        <td>10/12/2024</td>
+                    </tr>
+                    <tr>
+                        <td>12347</td>
+                        <td>Ford Mustang</td>
+                        <td>Failed</td>
+                        <td>08/12/2024</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Vehicle Rental System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelector('.navbar-toggle').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Car Rental</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .banner {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .breadcrumb {
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            background-color: #fff;
+        }
+
+        .search-bar input, .search-bar select {
+            padding: 10px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        .car-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .car-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .car-card img {
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .car-card .car-info {
+            padding: 15px;
+        }
+
+        .car-card .car-info h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .car-card .car-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .car-card .car-info .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .car-card .car-info .extra-price {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .car-card .car-info .book-now {
+            display: block;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+
+        .navbar .logo img {
+            width: 150px;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #f39c12;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f39c12;
+            transition: width 0.3s;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .navbar nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar.open nav {
+                display: flex;
+            }
+
+            .search-bar input, .search-bar select {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .car-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <div class="logo"><img src="logo.png" alt="logo"></div>
+        <span class="navbar-toggle">&#9776;</span>
+        <nav>
+            <a href="ahome.html">Home</a>
+            <a href="avehicles.html">Vehicles</a>
+            <a href="abooking.html">Book Now</a>
+            <a href="afteraboutus.html">About Us</a>
+            <a href="acontact.html">Contact</a>
+            <a href="profile.html">Profile</a>
+            <a href="index.html">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<div class="banner">
+    <h1>Select a self-drive car rental in Indore with DriveNGo</h1>
+</div>
+
+<div class="search-bar">
+    <input placeholder="Search..." type="text"/>
+    <select>
+        <option>Select car category</option>
+    </select>
+</div>
+
+<div class="car-list">
+    <div class="car-card">
+        <img alt="Mahindra Xuv 500 (Diesel)" height="200" src="https://storage.googleapis.com/a1aa/image/k3lafIQjuWwqQ6fgkWayLH7DiBLgstQAbiehGXCpVeQc12sPB.jpg" width="300"/>
+        <div class="car-info">
+            <h3>Xuv 500 (Diesel)</h3>
+            <p>Manual | 15/km | Diesel</p>
+            <p>Self-Drive &amp; Without Fuel | 7 Persons | AC</p>
+            <p>Indore (M.P)</p>
+            <p class="price">₹300/hr</p>
+            <p class="extra-price">Extra km fare = ₹15/hr</p>
+            <a class="book-now" href="abooking.html">BOOK NOW</a>
+        </div>
+    </div>
+    <!-- Repeat car-cards for other cars -->
+    <div class="car-card">
+    <img alt="Toyota etios (petrol)" height="200" src="https://storage.googleapis.com/a1aa/image/ByYv2bWwDi7lBRRmife7BVRjfJthxSJxfPos8YTknfCoqtZfE.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      Toyota etios (petrol)
+     </h3>
+     <p>
+      Manual | 16/km | Petrol
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹160/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹8/hr
+     </p>
+     <a class="book-now" href="abooking.html">BOOK NOW</a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="Mahindra Scorpio-N Black (2024)" height="200" src="https://storage.googleapis.com/a1aa/image/zGqYai1efblmeoxCCthizWHwHK6r1AHEfqlYfBf9QgvSWbzeJA.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      Scorpio-N Black (2024)
+     </h3>
+     <p>
+      Manual | 15/km | Diesel
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 7 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹474/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹20/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="TATA Altroz (2022)" height="200" src="altroz.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      TATA Altroz (2022)
+     </h3>
+     <p>
+      Manual | 18/km | Petrol
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹219/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹11/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="Hyundai i20 (2021)" height="200" src="https://storage.googleapis.com/a1aa/image/qTGXnDssCRaKJFczvmy1oUlyr8c6BTKJvg5v1C7VAaiqczeJA.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      Hyundai i20 (2021)
+     </h3>
+     <p>
+      Automatic | 20/km | Petrol
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹250/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹10/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="Maruti Suzuki Swift (2020)" height="200" src="https://storage.googleapis.com/a1aa/image/Xl9MVaVz0mZ0ChHG7ax6IzgfRsusDwQXUA63zFRuMTPW5m9JA.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      Maruti Suzuki Swift (2020)
+     </h3>
+     <p>
+      Manual | 18/km | Petrol
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹200/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹9/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="Honda City (2019)" height="200" src="https://storage.googleapis.com/a1aa/image/CPYRtCXe6VShJKDGvyPz684Ds80lg7MA6tzLfcEJ5N2tyN7TA.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      Honda City (2019)
+     </h3>
+     <p>
+      Automatic | 15/km | Petrol
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹300/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹12/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="Ford EcoSport (2018)" height="200" src="https://storage.googleapis.com/a1aa/image/xJU4p1EltTYNJBTuqVBfMqhO62CCkn5Fu6TG3MpGfr1uyN7TA.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      Ford EcoSport (2018)
+     </h3>
+     <p>
+      Manual | 17/km | Diesel
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹280/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹11/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="Renault Kwid (2021)" height="200" src="https://storage.googleapis.com/a1aa/image/Bj2ctWS2L96zLNBSPDzhyexUMI3QO9QFNmZtsEGpH1yw5m9JA.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      Renault Kwid (2021)
+     </h3>
+     <p>
+      Manual | 22/km | Petrol
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹180/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹7/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="Nissan Magnite (2022)" height="200" src="https://storage.googleapis.com/a1aa/image/jWqSfkGKbW3DdysbmzfrurzpkCfUZima63HsuypmpvwfN3sPB.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      Nissan Magnite (2022)
+     </h3>
+     <p>
+      Automatic | 18/km | Petrol
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹220/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹10/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="Kia Seltos (2021)" height="200" src="https://storage.googleapis.com/a1aa/image/xtlfq0RSt4WmcqUg1LL1bhMQ8ntLeg3gnCCTTBESaMkkzN7TA.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      Kia Seltos (2021)
+     </h3>
+     <p>
+      Manual | 16/km | Diesel
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹300/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹12/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+   <div class="car-card">
+    <img alt="MG Hector (2020)" height="200" src="https://storage.googleapis.com/a1aa/image/ueWsk4UAefeOzRfo574Rmpj3PaZhfejadETimTnIesnkgzN7TA.jpg" width="300"/>
+    <div class="car-info">
+     <h3>
+      MG Hector (2020)
+     </h3>
+     <p>
+      Automatic | 14/km | Petrol
+     </p>
+     <p>
+      Self-Drive &amp; Without Fuel | 5 Persons | AC
+     </p>
+     <p>
+      Indore (M.P)
+     </p>
+     <p class="price">
+      ₹350/hr
+     </p>
+     <p class="extra-price">
+      Extra km fare = ₹15/hr
+     </p>
+     <a class="book-now" href="abooking.html">
+      BOOK NOW
+     </a>
+    </div>
+   </div>
+</div>
+
+<script>
+    const navbarToggle = document.querySelector('.navbar-toggle');
+    const navbar = document.querySelector('.navbar');
+
+    navbarToggle.addEventListener('click', () => {
+        navbar.classList.toggle('open');
+    });
+</script>
+
+</body>
+</html>

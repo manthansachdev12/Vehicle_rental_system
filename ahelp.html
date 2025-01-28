@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Vehicle Rental System</title>
+    <style>
+        :root {
+            --primary-color: #2d2d2f;
+            --secondary-color: rgba(255, 255, 255, 0.9);
+            --text-color: #333;
+            --highlight-color: #f38a3f;
+            --hover-effect-color: #e6b800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: var(--text-color);
+            background: url('stacked-waves-haikei.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .navbar a:hover {
+            color: var(--highlight-color);
+        }
+
+        .chatbot-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-window {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            background: #f9f9f9;
+        }
+
+        .message {
+            margin: 0.5rem 0;
+        }
+
+        .user-message {
+            text-align: right;
+            color: var(--highlight-color);
+        }
+
+        .bot-message {
+            text-align: left;
+            color: var(--text-color);
+        }
+
+        .chat-input {
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .chat-input button {
+            background: var(--highlight-color);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        .chat-input button:hover {
+            background: #e6b800;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><img src="logo.png" alt="logo" width="150"></div>
+            <nav>
+                <a href="ahome.html" class="navopt">Home</a>
+                <a href="avehicles.html" class="navopt">Vehicles</a>
+                <a href="abooking.html" class="navopt">Book Now</a>
+                <a href="afteraboutus.html" class="navopt">About Us</a>
+                <a href="acontact.html" class="navopt">Contact</a>
+                <a href="profile.html" class="navopt">Profile</a>
+                <a href="help.html" class="navopt">Help</a>
+                <a href="index.html" class="navopt">Logout</a>
+                
+            </nav>
+        </div>
+    </header>
+
+    <div class="chatbot-container">
+        <h1>Help & Support</h1>
+        <div class="chat-window" id="chatWindow">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your message..." />
+            <button id="sendBtn">Send</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Vehicle Rental System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const chatWindow = document.getElementById('chatWindow');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        const botResponses = {
+            "hello": "Hi there! How can I assist you today?",
+            "book car": "To book a car, please go to the 'Book Now' page.",
+            "contact": "You can reach us on the 'Contact' page.",
+            "about us": "We are a vehicle rental service providing self-drive and with-driver options.",
+            "default": "I'm sorry, I didn't understand that. Can you rephrase?"
+        };
+
+        function addMessage(content, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', type === 'user' ? 'user-message' : 'bot-message');
+            messageDiv.innerText = content;
+            chatWindow.appendChild(messageDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        function handleUserInput() {
+            const userText = userInput.value.trim().toLowerCase();
+            if (userText) {
+                addMessage(userText, 'user');
+                const botReply = botResponses[userText] || botResponses["default"];
+                setTimeout(() => addMessage(botReply, 'bot'), 500);
+                userInput.value = '';
+            }
+        }
+
+        sendBtn.addEventListener('click', handleUserInput);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleUserInput();
+            }
+        });
+    </script>
+</body>
+</html>
